@@ -1,6 +1,7 @@
 package com.mkobya.employment_management_system.modal;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,5 +26,6 @@ public class Department extends BaseEntity {
     private String code;
 
     @OneToMany(mappedBy = "department")
+    @JsonIgnoreProperties("department")
     private List<Employee> employees = new ArrayList<>();
 }
