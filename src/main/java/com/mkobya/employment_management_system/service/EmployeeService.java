@@ -12,7 +12,7 @@ public interface EmployeeService {
 
     EmployeeResponseDto findEmployeeById (Long id);
 
-    List<Employee> findAllEmployees();
+    List<EmployeeResponseDto> listAllEmployees();
 
     void deleteById(Long id);
 }

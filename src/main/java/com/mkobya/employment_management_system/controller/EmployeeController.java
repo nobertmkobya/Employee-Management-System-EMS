@@ -1,6 +1,7 @@
 package com.mkobya.employment_management_system.controller;
 
 
+import com.mkobya.employment_management_system.modal.Employee;
 import com.mkobya.employment_management_system.payload.requestDto.EmployeeDto;
 import com.mkobya.employment_management_system.payload.responseDto.EmployeeResponseDto;
 import com.mkobya.employment_management_system.service.DepartmentService;
@@ -9,8 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/employee")
+@RequestMapping("/api/employees")
 @RequiredArgsConstructor
 
 public class EmployeeController {
@@ -26,5 +29,10 @@ public class EmployeeController {
     @GetMapping("/get/{id}")
     public ResponseEntity<EmployeeResponseDto> findEmployeeById(@PathVariable Long id ){
         return ResponseEntity.ok(employeeService.findEmployeeById(id));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<EmployeeResponseDto>> listing(){
+        return ResponseEntity.ok(employeeService.listAllEmployees());
     }
 }

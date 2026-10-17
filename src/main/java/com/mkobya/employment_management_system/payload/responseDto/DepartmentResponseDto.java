@@ -8,4 +8,5 @@ public class DepartmentResponseDto {
     private String name;
     private String description;
     private String code;
+    private Boolean active;
 }

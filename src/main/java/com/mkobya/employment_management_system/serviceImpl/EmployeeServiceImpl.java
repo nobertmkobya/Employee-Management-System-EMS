@@ -52,16 +52,22 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findAllEmployees() {
-        return List.of();
+    public List<EmployeeResponseDto> listAllEmployees() {
+        List<Employee> listOfEmployees=employeeRepository.findAll();
+
+        return listOfEmployees.stream()
+                .map(this::getEmployeeResponseDto)
+                .toList();
     }
+
 
     @Override
     public void deleteById(Long id) {
 
+
     }
 
-    private static EmployeeResponseDto getEmployeeResponseDto(Employee employee){
+    private EmployeeResponseDto getEmployeeResponseDto(Employee employee){
         EmployeeResponseDto dto = new EmployeeResponseDto();
         dto.setAge(employee.getAge());
         dto.setEmail(employee.getEmail());

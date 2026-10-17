@@ -46,9 +46,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<Department> findAll() {
+    public List<DepartmentResponseDto> findAll() {
         log.info("Get All Departments");
-        return departmentRepository.findAll();
+        List<Department> listOfAllDepartments = departmentRepository.findAll();
+
+        return listOfAllDepartments.stream()
+                .map(this::getDepartmentResponseDto)
+                .toList();
     }
 
     @Override
@@ -64,12 +68,14 @@ public class DepartmentServiceImpl implements DepartmentService {
         departmentRepository.save(retrievedDepartment);
     }
 
-    private static DepartmentResponseDto getDepartmentResponseDto(Department department){
+    private DepartmentResponseDto getDepartmentResponseDto(Department department){
         DepartmentResponseDto dto = new DepartmentResponseDto();
         dto.setName(department.getName());
         dto.setCode(department.getCode());
         dto.setDescription(department.getDescription());
         dto.setId(department.getId());
+        dto.setActive(department.getActive());
+
         return dto;
     }
 }
